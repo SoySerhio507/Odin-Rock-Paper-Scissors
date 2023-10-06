@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Console Rock Paper Scissors</title>
+</head>
+<body>
+    <script>
+        function getComputerChoice() {
+            const choices = ["rock", "paper", "scissors"]
+            const index = Math.floor(Math.random() * 3)
+            return choices[index]
+        }
+        function getPlayerChoice(response) {
+            playerResponse = String(response)
+            return playerResponse.toLowerCase()
+        }
+        function playRound(playerChoice, computerChoice) {
+
+            let playerWon
+
+            if (playerChoice === computerChoice) {
+                playerWon = null
+            }
+
+            else if (playerChoice === "rock") {
+                if (computerChoice === "paper") {
+                    playerWon = false
+                }
+                else /*computerChoice === scissors*/ {
+                    playerWon = true
+                }
+            }
+
+            else if (playerChoice === "paper") {
+                if (computerChoice === "rock") {
+                    playerWon = true
+                }
+                else /*computerChoice === scissors*/{
+                    playerWon = false
+                }
+            }
+
+            else if(playerChoice === "scissors") {
+                if (computerChoice === "rock") {
+                    playerWon = false
+                }
+                else /*computerChoice === paper*/{
+                    playerWon = true
+                }
+            }
+            return playerWon
+        }
+
+        function printResult(playerWon, playerChoice, computerChoice) {
+            if (playerWon == null) {
+                console.log(`Its a draw! ${playerChoice} draws ${computerChoice}\n`)
+            }
+            else if (playerWon) {
+                console.log(`You win! ${playerChoice} beats ${computerChoice}\n`)
+            }
+            else {
+                console.log(`I win! ${playerChoice} loses to ${computerChoice}\n`)
+            }
+        }
+
+        function game() {
+            console.log("Lets play rock-paper-scissors!\nChoose one of the following:\n  - Rock\n  - Paper\n  - Scissors\n")
+            let playerWins = 0
+            let computerWins = 0
+            let gameResult = ""
+            let playerChoice
+            let computerChoice
+            while (playerWins < 3 && computerWins < 3) {
+                console.log(gameResult)
+                playerChoice = getPlayerChoice(prompt())
+                computerChoice = getComputerChoice()
+                playerWon = playRound(playerChoice, computerChoice)
+                printResult(playerWon, playerChoice, computerChoice)
+                if (playerWon != null) {
+                    if (playerWon) {
+                        playerWins ++
+                    }
+                    else {
+                        computerWins ++
+                    }
+                }
+            }
+
+            console.log("Thanks for playing!\n")
+            if (playerWins == 3) {
+                return "You beat me..."
+            }
+            else {
+                return "I beat you >:)"
+            }
+        }
+    </script>
+</body>
+</html>
